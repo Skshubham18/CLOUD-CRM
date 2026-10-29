@@ -1,0 +1,25 @@
+{
+  "name": "ai-powered-cloud-crm",
+  "version": "1.0.0",
+  "description": "AI-Powered Cloud CRM for Small Businesses - Final-Year B.Tech Project",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm start",
+    "build:frontend": "cd frontend && npm run build",
+    "test:health": "node -e \"fetch('http://127.0.0.1:5000/api/health').then(r=>r.json()).then(d=>console.log(JSON.stringify(d, null, 2))).catch(e=>console.error('Backend offline:', e.message))\"",
+    "test:db": "node database/test-connection.js",
+    "test": "node scripts/test-suite.js"
+  },
+  "keywords": [
+    "crm",
+    "react",
+    "express",
+    "nodejs",
+    "postgresql",
+    "cloud"
+  ],
+  "author": "",
+  "license": "ISC"
+}
