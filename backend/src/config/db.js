@@ -1,21 +1,25 @@
 const { Pool } = require('pg');
 const config = require('./env');
 
-const poolConfig = {
-  host: config.db.host,
-  port: config.db.port,
-  database: config.db.database,
-  user: config.db.user,
-  password: config.db.password,
-  // Reasonable connection timeouts for cloud and local databases
-  connectionTimeoutMillis: 3000,
-  idleTimeoutMillis: 30000,
-  max: 10
-};
-
-if (process.env.DB_SSL === 'true') {
-  poolConfig.ssl = { rejectUnauthorized: false };
-}
+const poolConfig = process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
+      connectionTimeoutMillis: 5000,
+      idleTimeoutMillis: 30000,
+      max: 10
+    }
+  : {
+      host: config.db.host,
+      port: config.db.port,
+      database: config.db.database,
+      user: config.db.user,
+      password: config.db.password,
+      connectionTimeoutMillis: 3000,
+      idleTimeoutMillis: 30000,
+      max: 10,
+      ...(process.env.DB_SSL === 'true' ? { ssl: { rejectUnauthorized: false } } : {})
+    };
 
 const pool = new Pool(poolConfig);
 

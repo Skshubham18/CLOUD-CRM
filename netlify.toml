@@ -3,7 +3,17 @@
   command = "npm run build"
   publish = "dist"
 
+# Optional: If you host your Express backend externally (e.g. Render, Railway, AWS App Runner),
+# you can proxy /api/* requests to your live backend by uncommenting below:
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend.onrender.com/api/:splat"
+#   status = 200
+#   force = true
+
+# SPA Fallback: Route all client-side navigation to index.html (MUST be at the bottom)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+

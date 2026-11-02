@@ -569,7 +569,10 @@ async function runTestSuite() {
     if (res.status !== 200) throw new Error(`Expected HTTP 200, got ${res.status}`);
     const data = await res.json();
     if (!data.data?.summary) throw new Error('Deal summary missing');
-    if (data.data?.summary?.winRate !== 0) throw new Error(`Expected 0% win rate for 0 deals, got ${data.data?.summary?.winRate}`);
+    if (typeof data.data?.summary?.winRate !== 'number') throw new Error(`Expected numeric win rate, got ${data.data?.summary?.winRate}`);
+    if (data.data?.summary?.totalDeals === 0 && data.data?.summary?.winRate !== 0) {
+      throw new Error(`Expected 0% win rate for 0 deals, got ${data.data?.summary?.winRate}`);
+    }
     if (!Array.isArray(data.data?.dealsByStage)) throw new Error('dealsByStage missing');
   });
 

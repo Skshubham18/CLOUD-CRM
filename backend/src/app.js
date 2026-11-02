@@ -17,6 +17,7 @@ if (config.nodeEnv !== 'test') {
 const allowedOrigins = [
   'http://127.0.0.1:5173',
   'http://localhost:5173',
+  'https://cloudbus.netlify.app',
   ...(config.corsOrigin ? config.corsOrigin.split(',').map(o => o.trim()) : [])
 ];
 
