@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const apiRoutes = require('./routes');
+const apiRoutesModule = require('./routes/index.js');
+const apiRoutes = (apiRoutesModule && apiRoutesModule.default) ? apiRoutesModule.default : apiRoutesModule;
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
 const config = require('./config/env');
