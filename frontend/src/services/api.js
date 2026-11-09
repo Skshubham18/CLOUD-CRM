@@ -3,8 +3,7 @@
  */
 
 const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.PROD ? '/api' : 'http://127.0.0.1:5000/api')
+  import.meta.env.VITE_API_BASE_URL || '/api'
 ).replace(/\/$/, '');
 const TOKEN_KEY = 'cloud_crm_jwt_token';
 
@@ -448,7 +447,7 @@ export async function checkBackendHealth() {
       status: 0,
       latencyMs,
       data: null,
-      error: err.message || 'Failed to connect to backend server. Ensure backend is running on port 5000.',
+      error: err.message || 'Failed to connect to backend server. Ensure backend service is running and accessible.',
     };
   }
 }

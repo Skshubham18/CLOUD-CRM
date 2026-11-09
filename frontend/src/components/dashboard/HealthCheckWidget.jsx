@@ -157,7 +157,7 @@ export default function HealthCheckWidget() {
 
           <pre className="crm-json-pre">
             {loading ? (
-              <span className="text-muted">Fetching response from http://127.0.0.1:5000/api/health...</span>
+              <span className="text-muted">Fetching response from /api/health...</span>
             ) : result?.data ? (
               <code>{JSON.stringify(result.data, null, 2)}</code>
             ) : result?.error ? (

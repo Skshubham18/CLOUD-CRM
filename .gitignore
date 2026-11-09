@@ -12,11 +12,13 @@ build/
 
 # Environment files
 .env
+.env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .env.cloud
+.env.neon
 
 # Database Backups & Dumps (Security & Privacy)
 backups/
