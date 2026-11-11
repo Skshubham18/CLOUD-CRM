@@ -2,7 +2,22 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const apiRoutesModule = require('./routes/index.js');
-const apiRoutes = (apiRoutesModule && apiRoutesModule.default) ? apiRoutesModule.default : apiRoutesModule;
+const resolveRouter = (moduleValue) => {
+  let router = moduleValue;
+  const seen = new Set();
+
+  while (router && typeof router !== 'function' && typeof router === 'object' && !seen.has(router)) {
+    seen.add(router);
+    router = router.default || router.router;
+  }
+
+  if (typeof router !== 'function') {
+    throw new TypeError('The API routes module must export an Express router');
+  }
+
+  return router;
+};
+const apiRoutes = resolveRouter(apiRoutesModule);
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
 const config = require('./config/env');
